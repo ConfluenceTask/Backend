@@ -18,6 +18,11 @@ public class CardController {
         this.service = cardService;
     }
 
+    @GetMapping("/auth")
+    public String auth() {
+        return "auth only";
+    }
+
     @GetMapping("/all")
     public List<Card> findAll() {
         return service.findAllCards();

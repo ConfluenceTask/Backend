@@ -13,6 +13,7 @@ public class CardServiceImpl implements CardService {
 
     private final InMemoryCardDAO repository;
 
+    @Autowired
     public CardServiceImpl(InMemoryCardDAO repository) {
         this.repository = repository;
     }
