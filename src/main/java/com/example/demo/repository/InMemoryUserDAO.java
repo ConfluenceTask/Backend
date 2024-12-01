@@ -20,16 +20,16 @@ public class InMemoryUserDAO {
         return user;
     }
 
-    public User findUserById(Long id) {
+    public User findUserByUsername(String username) {
         return USERS.stream()
-                .filter(user -> user.getId().equals(id))
+                .filter(user -> user.getUsername().equals(username))
                 .findFirst()
                 .orElse(null);
     }
 
     public User update(User user) {
         var userIndex = IntStream.range(0, USERS.size())
-                .filter(i -> USERS.get(i).getId().equals(user.getId()))
+                .filter(i -> USERS.get(i).getUsername().equals(user.getUsername()))
                 .findFirst()
                 .orElse(-1);
 
@@ -40,10 +40,16 @@ public class InMemoryUserDAO {
     }
 
 
-    public void deleteById(Long id) {
-        var user = findUserById(id);
+    public void deleteByUsername(String username) {
+        var user = findUserByUsername(username);
         if (user != null) {
             USERS.remove(user);
         }
+    }
+
+    public boolean authenticate(String login, String password) {
+        return USERS.stream()
+                .anyMatch(u -> u.getUsername().equals(login) &&
+                        u.getPassword().equals(password));
     }
 }
