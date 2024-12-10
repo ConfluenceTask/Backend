@@ -8,8 +8,9 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.util.List;
 
-@CrossOrigin("*")
+
 @RestController
+@CrossOrigin()
 @RequestMapping("/api/v1/cards")
 public class CardController {
 
